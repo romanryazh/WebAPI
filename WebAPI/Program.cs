@@ -1,6 +1,13 @@
+using WebAPI;
+using WebAPI.Middlewares;
+using RouterMiddleware = WebAPI.Middlewares.RouterMiddleware;
+
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-// app.MapGet("/", () => "Hello World!");
+app.UseMiddleware<ErrorMiddleware>();
+app.UseMiddleware<AuthorizationMiddleware>();
+app.UseMiddleware<RouterMiddleware>();
+
 
 app.Run();
